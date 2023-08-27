@@ -31,9 +31,9 @@ public class EnemySpaceship {
         return enemySpaceship.getHeight();
     }
     private void resetEnemySpaceship() {
-        ex = 400 + random.nextInt(400);
+        ex = 1000 + random.nextInt(400);
         ey = 0;
-        enemyVelocity = 14 + random.nextInt(10);
+        enemyVelocity = 50 + random.nextInt(10);
     }
 
 }

@@ -113,7 +113,7 @@ public class game1 extends View {
             canvas.drawBitmap(ourSpaceship.getOurSpaceship(),ourSpaceship.ox, ourSpaceship.oy,null);
         }
         for (int i =0;i<enemyShots.size();i++){
-            enemyShots.get(i).shy+=15;
+            enemyShots.get(i).shy+=50;
             canvas.drawBitmap(enemyShots.get(i).getShot(),enemyShots.get(i).shx, enemyShots.get(i).shy,null);
             if((enemyShots.get(i).shx>=ourSpaceship.ox)
             && (enemyShots.get(i).shx<=ourSpaceship.ox+ ourSpaceship.getOurSpaceshipWidth())
@@ -132,7 +132,7 @@ public class game1 extends View {
         }
 
         for(int i = 0;i<ourShots.size();i++){
-            ourShots.get(i).shy-=15;
+            ourShots.get(i).shy-=30;
             canvas.drawBitmap(ourShots.get(i).getShot(), ourShots.get(i).shx, ourShots.get(i).shy, null);
             if((ourShots.get(i).shx>=enemySpaceship.ex)
             && (ourShots.get(i).shx<=enemySpaceship.ex+ enemySpaceship.getEnemySpaceshipWidth())
