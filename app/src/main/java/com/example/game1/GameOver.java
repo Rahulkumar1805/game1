@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GameOver extends AppCompatActivity {
-    TextView tvPoints;
+    TextView tvPoints, highScore;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -18,8 +18,12 @@ public class GameOver extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameover);
         int points= getIntent().getExtras().getInt("Points");
+        int hs = getIntent().getExtras().getInt("HighScore");
         tvPoints= findViewById(R.id.tvPoints);
+        highScore= findViewById(R.id.highScore);
         tvPoints.setText(""+points);
+        highScore.setText(" "+hs);
+
     }
     public  void restart (View v){
         Intent intent = new Intent(GameOver.this, StartUp.class);

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -38,12 +39,16 @@ public class game1 extends View {
     Explosion explosion;
     ArrayList<Explosion> explosions;
     boolean enemyShotAction = false;
+    SharedPreferences preferences;
+    int getHighScore;
     final Runnable runnable = new Runnable() {
         @Override
         public void run() {
             invalidate();
         }
     };
+
+
 
     public  game1(Context context){
         super(context);
@@ -67,6 +72,10 @@ public class game1 extends View {
         scorePaint.setTextSize(TEXT_SIZE);
         scorePaint.setTextAlign(Paint.Align.LEFT);
 
+        preferences = context.getSharedPreferences("highScore",Context.MODE_PRIVATE);
+        getHighScore = preferences.getInt("flag",0);
+        highScore= getHighScore;
+
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -78,9 +87,14 @@ public class game1 extends View {
         if (life == 0) {
             paused = true;
             handler = null;
-            if(points>highScore){
-                highScore=points;
+            if (points > highScore) {
+                highScore = points;
+                // Save the new high score to SharedPreferences
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putInt("flag", highScore);
+                editor.apply();
             }
+
             @SuppressLint("DrawAllocation") Intent intent = new Intent(context, GameOver.class);
             intent.putExtra("Points",points);
             intent.putExtra("HighScore",highScore);
@@ -88,6 +102,7 @@ public class game1 extends View {
               ((Activity) context).finish();
 
         }
+
 
         enemySpaceship.ex+=enemySpaceship.enemyVelocity;
         if(enemySpaceship.ex+ enemySpaceship.getEnemySpaceshipWidth()>= screenWidth){
